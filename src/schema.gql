@@ -1,0 +1,37 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type RoomModel {
+  id: String!
+  name: String!
+  secretKey: String!
+  joinedUsers: [UserModel!]!
+}
+
+type UserModel {
+  id: String!
+  name: String!
+  secretKey: String!
+  joinedRooms: [RoomModel!]!
+}
+
+type ProductModel {
+  id: String!
+  name: String!
+  secretKey: String!
+  users: [UserModel!]!
+  rooms: [RoomModel!]!
+}
+
+type DeveloperModel {
+  id: String!
+  email: String!
+  encryptedPassword: String!
+  joinedProducts: [ProductModel!]!
+}
+
+type Query {
+  signedDeveloper: DeveloperModel
+  signedUser: UserModel
+}
