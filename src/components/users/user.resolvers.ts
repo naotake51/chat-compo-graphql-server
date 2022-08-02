@@ -4,7 +4,7 @@ import { UserModel } from './models/user.model';
 @Resolver((of) => UserModel)
 export class UserResolver {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  constructor() { }
 
   @Query(() => UserModel, { name: 'signedUser', nullable: true })
   async getSignedUser() {
@@ -13,28 +13,44 @@ export class UserResolver {
       name: 'hoge',
       joinedRooms: [
         {
-          id: 'aaf7212c-1bba-db35-848a-366c57d543d1',
-          name: 'hoge',
-          secretKey: '80ee6d5e-52d3-e801-a37d-25bdaea6b580',
-          joinedUsers: [
-            {
-              id: 'aaf7212c-1bba-db35-848a-366c57d543d1',
-              name: 'hoge',
-              secretKey: '80ee6d5e-52d3-e801-a37d-25bdaea6b580',
-            },
-          ],
+          joinedMessageOrder: 1,
+          readMessageOrder: 1,
+          room: {
+            id: 'aaf7212c-1bba-db35-848a-366c57d543d1',
+            name: 'hoge',
+            secretKey: '80ee6d5e-52d3-e801-a37d-25bdaea6b580',
+            joinedUsers: [
+              {
+                joinedMessageOrder: 1,
+                readMessageOrder: 1,
+                user: {
+                  id: 'aaf7212c-1bba-db35-848a-366c57d543d1',
+                  name: 'hoge',
+                  secretKey: '80ee6d5e-52d3-e801-a37d-25bdaea6b580',
+                },
+              },
+            ],
+          },
         },
         {
-          id: '7b3f50de-f597-eb19-76ae-391f12bcc9e0',
-          name: 'hoge',
-          secretKey: 'e2e829d15-0c0f-31c8-c88d-e7231a3dac0d',
-          joinedUsers: [
-            {
-              id: 'aaf7212c-1bba-db35-848a-366c57d543d1',
-              name: 'hoge',
-              secretKey: '80ee6d5e-52d3-e801-a37d-25bdaea6b580',
-            },
-          ],
+          joinedMessageOrder: 1,
+          readMessageOrder: 1,
+          room: {
+            id: '7b3f50de-f597-eb19-76ae-391f12bcc9e0',
+            name: 'hoge',
+            secretKey: 'e2e829d15-0c0f-31c8-c88d-e7231a3dac0d',
+            joinedUsers: [
+              {
+                joinedMessageOrder: 1,
+                readMessageOrder: 1,
+                user: {
+                  id: 'aaf7212c-1bba-db35-848a-366c57d543d1',
+                  name: 'hoge',
+                  secretKey: '80ee6d5e-52d3-e801-a37d-25bdaea6b580',
+                },
+              },
+            ],
+          },
         },
       ],
     };

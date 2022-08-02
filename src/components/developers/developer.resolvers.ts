@@ -13,18 +13,24 @@ export class DeveloperResolver {
       email: 'hoge@sample.com',
       joinedProducts: [
         {
-          id: 'e67b06fd-c371-12d5-dbbe-f09456edd8d3',
-          name: 'hoge',
-          secretKey: 'ed7bc3cb-40c3-75f8-6c01-772b2178bb97',
-          users: [],
-          rooms: [],
+          product: {
+            id: 'e67b06fd-c371-12d5-dbbe-f09456edd8d3',
+            name: 'hoge',
+            secretKey: 'ed7bc3cb-40c3-75f8-6c01-772b2178bb97',
+            joinedDeveloper: [],
+            users: [],
+            rooms: [],
+          },
         },
         {
-          id: 'a64d5c6d-5e66-2761-ce86-b83be8f60e3a',
-          name: 'hoge',
-          secretKey: 'b49befa4-65a2-24d5-f20d-f4006dcf53ba',
-          users: [],
-          rooms: [],
+          product: {
+            id: 'a64d5c6d-5e66-2761-ce86-b83be8f60e3a',
+            name: 'hoge',
+            secretKey: 'b49befa4-65a2-24d5-f20d-f4006dcf53ba',
+            joinedDeveloper: [],
+            users: [],
+            rooms: [],
+          },
         },
       ],
     };

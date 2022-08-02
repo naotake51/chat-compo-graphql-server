@@ -6,29 +6,42 @@ type RoomModel {
   id: String!
   name: String!
   secretKey: String!
-  joinedUsers: [UserModel!]!
+  joinedUsers: [UserRoomModel!]!
+}
+
+type UserRoomModel {
+  room: RoomModel!
+  user: UserModel!
+  joinedMessageOrder: Int!
+  readMessageOrder: Int!
 }
 
 type UserModel {
   id: String!
   name: String!
   secretKey: String!
-  joinedRooms: [RoomModel!]!
+  joinedRooms: [UserRoomModel!]!
 }
 
 type ProductModel {
   id: String!
   name: String!
   secretKey: String!
+  joinedDeveloper: [DeveloperProductModel!]!
   users: [UserModel!]!
   rooms: [RoomModel!]!
+}
+
+type DeveloperProductModel {
+  product: ProductModel!
+  developer: DeveloperModel!
 }
 
 type DeveloperModel {
   id: String!
   email: String!
   encryptedPassword: String!
-  joinedProducts: [ProductModel!]!
+  joinedProducts: [DeveloperProductModel!]!
 }
 
 type Query {

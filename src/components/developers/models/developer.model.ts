@@ -1,5 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { ProductModel } from '../../products/models/product.model';
+import { DeveloperProductModel } from '../../developer-product/models/developer-product.model';
 
 @ObjectType()
 export class DeveloperModel {
@@ -12,6 +12,6 @@ export class DeveloperModel {
   @Field((type) => String)
   encryptedPassword: string;
 
-  @Field((type) => [ProductModel])
-  joinedProducts: ProductModel[];
+  @Field((type) => [DeveloperProductModel])
+  joinedProducts: DeveloperProductModel[];
 }
