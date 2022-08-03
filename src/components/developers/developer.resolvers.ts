@@ -27,16 +27,6 @@ export class DeveloperResolver {
           rooms: [],
         },
       },
-      {
-        product: {
-          id: 'a64d5c6d-5e66-2761-ce86-b83be8f60e3a',
-          name: 'hoge',
-          secretKey: 'b49befa4-65a2-24d5-f20d-f4006dcf53ba',
-          joinedDeveloper: [],
-          users: [],
-          rooms: [],
-        },
-      },
     ];
   }
 }
