@@ -45,6 +45,6 @@ type DeveloperModel {
 }
 
 type Query {
-  signedDeveloper: DeveloperModel
-  signedUser: UserModel
+  signedDeveloper(id: String!): DeveloperModel
+  signedUser(id: String!): UserModel
 }

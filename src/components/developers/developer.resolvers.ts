@@ -7,7 +7,7 @@ export class DeveloperResolver {
   constructor() {}
 
   @Query(() => DeveloperModel, { name: 'signedDeveloper', nullable: true })
-  async getSignedDeveloper() {
+  async getSignedDeveloper(@Args('id', { type: () => String }) id: string) {
     return {
       id: '86742cd7-608a-f372-e4e7-ef0a2ea23fc7',
       email: 'hoge@sample.com',

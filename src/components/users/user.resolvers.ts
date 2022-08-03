@@ -7,7 +7,7 @@ export class UserResolver {
   constructor() {}
 
   @Query(() => UserModel, { name: 'signedUser', nullable: true })
-  async getSignedUser() {
+  async getSignedUser(@Args('id', { type: () => String }) id: string) {
     return {
       id: '40061f88-f6ac-d2fc-167b-c5a860f79f54',
       name: 'hoge',
