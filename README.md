@@ -71,3 +71,46 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## Query sample
+
+```graphql
+# Write your query or mutation here
+query {
+  signedDeveloper(id: "1") {
+    id
+    email
+    joinedProducts {
+      product {
+        id
+        name
+        users {
+          id
+        }
+        rooms {
+          id
+        }
+      }
+    }
+  }
+  signedUser(id: "1") {
+    id
+    name
+    joinedRooms {
+      joinedMessageOrder
+      readMessageOrder
+      room {
+       id
+       name
+       joinedUsers {
+         joinedMessageOrder
+         readMessageOrder
+      	 user {
+          id
+         }
+       }
+     }
+    }
+  }
+}
+``
