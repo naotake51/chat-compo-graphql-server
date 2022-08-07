@@ -9,3 +9,113 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model SystemAdmin {
+  id                String             @id @default(uuid()) // 変更不可
+  email             String             @unique
+  encriptedPassword String? // 仮登録中はNull
+  createdAt         DateTime           @default(now()) // 変更不可
+  updatedAt         DateTime           @updatedAt
+
+  @@index([updatedAt, id]) // 表示順用
+}
+
+model Developer {
+  id                String             @id @default(uuid()) // 変更不可
+  email             String             @unique
+  encriptedPassword String? // 仮登録中はNull
+  joinedProducts    DeveloperProduct[]
+  createdAt         DateTime           @default(now()) // 変更不可
+  updatedAt         DateTime           @updatedAt
+
+  @@index([updatedAt, id]) // 表示順用
+}
+
+model Product {
+  id               String             @id @default(uuid()) // 変更不可
+  name             String
+  joinedDevelopers DeveloperProduct[]
+  users            User[]
+  rooms            Room[]
+  createdAt        DateTime           @default(now()) // 変更不可
+  updatedAt        DateTime           @updatedAt
+}
+
+model DeveloperProduct {
+  developer   Developer @relation(fields: [developerId], references: [id])
+  developerId String // 変更不可
+  product     Product   @relation(fields: [productId], references: [id])
+  productId   String // 変更不可
+  createdAt   DateTime  @default(now()) // 変更不可
+  updatedAt   DateTime  @updatedAt
+
+  @@id([developerId, productId])
+  @@index([productId])
+}
+
+model User {
+  id          String     @id @default(uuid()) // 変更不可
+  name        String
+  image       String
+  secretKey   String
+  order       Int        @default(autoincrement()) // 変更不可
+  product     Product    @relation(fields: [productId], references: [id])
+  productId   String // 変更不可
+  joinedRooms RoomUser[]
+  messages    Message[]
+  createdAt   DateTime   @default(now()) // 変更不可
+  updatedAt   DateTime   @updatedAt
+
+  @@unique([productId, order]) // 表示順用
+}
+
+model Room {
+  id          String     @id @default(uuid()) // 変更不可
+  name        String?
+  image       String?
+  order       Int        @default(autoincrement()) // 変更不可
+  product     Product    @relation(fields: [productId], references: [id])
+  productId   String // 変更不可
+  joinedUsers RoomUser[]
+  messages    Message[]
+  createdAt   DateTime   @default(now()) // 変更不可
+  updatedAt   DateTime   @updatedAt
+
+  @@unique([productId, order]) // 表示順用
+}
+
+enum MessageType {
+  TEXT // テキスト
+  IMAGE // 画像
+  MOVIE // 動画
+}
+
+model Message {
+  room      Room        @relation(fields: [roomId], references: [id])
+  roomId    String // 変更不可
+  user      User?       @relation(fields: [userId], references: [id])
+  userId    String? // 変更不可 TODO:: ユーザー削除時にはnullを設定する
+  order     Int // 変更不可
+  type      MessageType @default(TEXT) // 変更不可
+  payload   String // typeに依存する
+  createdAt DateTime    @default(now()) // 変更不可
+  deletedAt DateTime? // 変更不可
+
+  @@id([roomId, order]) // 表示順用
+}
+
+model RoomUser {
+  room               Room     @relation(fields: [roomId], references: [id])
+  roomId             String // 変更不可
+  user               User     @relation(fields: [userId], references: [id])
+  userId             String // 変更不可
+  order              Int      @default(autoincrement()) // TODO
+  readonly           Boolean  @default(false)
+  joinedMessageOrder Int // 参加時メッセージ番号
+  readMessageOrder   Int // 最終既読メッセージ番号
+  createdAt          DateTime @default(now()) // 変更不可
+  updatedAt          DateTime @updatedAt
+
+  @@id([roomId, userId])
+  @@index([userId])
+}
