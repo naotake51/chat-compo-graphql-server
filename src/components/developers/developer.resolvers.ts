@@ -1,17 +1,22 @@
+import { NotFoundException } from '@nestjs/common';
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { DeveloperService } from './developer.service';
 import { DeveloperModel } from './models/developer.model';
 
 @Resolver((of) => DeveloperModel)
 export class DeveloperResolver {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  constructor(private readonly developerService: DeveloperService) {}
 
   @Query(() => DeveloperModel, { name: 'signedDeveloper', nullable: true })
   async getSignedDeveloper(@Args('id', { type: () => String }) id: string) {
-    return {
-      id: '86742cd7-608a-f372-e4e7-ef0a2ea23fc7',
-      email: 'hoge@sample.com',
-    };
+    const developer = await this.developerService.findById(
+      '86742cd7-608a-f372-e4e7-ef0a2ea23fc7',
+    );
+    if (!developer) {
+      throw new NotFoundException();
+    }
+
+    return developer;
   }
 
   @ResolveField()
