@@ -1,5 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { DeveloperProductModel } from '../../developer-product/models/developer-product.model';
+import { DeveloperProductModel } from '@/components/developer-product/models/developer-product.model';
 
 @ObjectType()
 export class DeveloperModel {

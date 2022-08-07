@@ -1,5 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { UserRoomModel } from '../../user-room/models/user-room.model';
+import { UserRoomModel } from '@/components/user-room/models/user-room.model';
 
 @ObjectType()
 export class UserModel {

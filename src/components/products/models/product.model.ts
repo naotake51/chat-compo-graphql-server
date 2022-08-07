@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { DeveloperProductModel } from '../../developer-product/models/developer-product.model';
-import { UserModel } from '../../users/models/user.model';
-import { RoomModel } from '../../rooms/models/room.model';
+import { DeveloperProductModel } from '@/components/developer-product/models/developer-product.model';
+import { UserModel } from '@/components/users/models/user.model';
+import { RoomModel } from '@/components/rooms/models/room.model';
 
 @ObjectType()
 export class ProductModel {

@@ -1,6 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { DeveloperModel } from '../../developers/models/developer.model';
-import { ProductModel } from '../../products/models/product.model';
+import { DeveloperModel } from '@/components/developers/models/developer.model';
+import { ProductModel } from '@/components/products/models/product.model';
 
 @ObjectType()
 export class DeveloperProductModel {
