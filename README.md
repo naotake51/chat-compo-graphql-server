@@ -74,6 +74,8 @@ Nest is [MIT licensed](LICENSE).
 
 ## Query sample
 
+http://localhost:3000/graphql
+
 ```graphql
 # Write your query or mutation here
 query {
