@@ -79,7 +79,7 @@ http://localhost:3000/graphql
 ```graphql
 # Write your query or mutation here
 query {
-  signedDeveloper(id: "1") {
+  signedDeveloper(id: "86742cd7-608a-f372-e4e7-ef0a2ea23fc7") {
     id
     email
     joinedProducts {

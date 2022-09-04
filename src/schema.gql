@@ -34,7 +34,10 @@ type ProductModel {
 
 type DeveloperProductModel {
   product: ProductModel!
+  productId: String!
   developer: DeveloperModel!
+  developerId: String!
+  createdAt: String!
 }
 
 type DeveloperModel {
