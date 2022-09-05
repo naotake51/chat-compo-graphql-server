@@ -1,8 +1,8 @@
 import { NotFoundException } from '@nestjs/common';
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { DeveloperProductsService } from '@/developer-products/developer-products.service';
 import { DevelopersService } from '@/developers/developers.service';
 import { Developer } from '@/developers/models/developer.model';
-import { DeveloperProductsService } from '@/developer-products/developer-products.service';
 
 @Resolver((of) => Developer)
 export class DevelopersResolver {

@@ -2,11 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Room {
+type Developer {
+  id: String!
+  email: String!
+  encryptedPassword: String!
+  joinedProducts: [DeveloperProduct!]!
+}
+
+type User {
   id: String!
   name: String!
   secretKey: String!
-  joinedUsers: [UserRoom!]!
+  joinedRooms: [UserRoom!]!
 }
 
 type UserRoom {
@@ -16,11 +23,11 @@ type UserRoom {
   readMessageOrder: Int!
 }
 
-type User {
+type Room {
   id: String!
   name: String!
   secretKey: String!
-  joinedRooms: [UserRoom!]!
+  joinedUsers: [UserRoom!]!
 }
 
 type Product {
@@ -38,13 +45,6 @@ type DeveloperProduct {
   developer: Developer!
   developerId: String!
   createdAt: String!
-}
-
-type Developer {
-  id: String!
-  email: String!
-  encryptedPassword: String!
-  joinedProducts: [DeveloperProduct!]!
 }
 
 type Query {
