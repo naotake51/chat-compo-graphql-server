@@ -2,52 +2,52 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type RoomModel {
+type Room {
   id: String!
   name: String!
   secretKey: String!
-  joinedUsers: [UserRoomModel!]!
+  joinedUsers: [UserRoom!]!
 }
 
-type UserRoomModel {
-  room: RoomModel!
-  user: UserModel!
+type UserRoom {
+  room: Room!
+  user: User!
   joinedMessageOrder: Int!
   readMessageOrder: Int!
 }
 
-type UserModel {
+type User {
   id: String!
   name: String!
   secretKey: String!
-  joinedRooms: [UserRoomModel!]!
+  joinedRooms: [UserRoom!]!
 }
 
-type ProductModel {
+type Product {
   id: String!
   name: String!
   secretKey: String!
-  joinedDeveloper: [DeveloperProductModel!]!
-  users: [UserModel!]!
-  rooms: [RoomModel!]!
+  joinedDeveloper: [DeveloperProduct!]!
+  users: [User!]!
+  rooms: [Room!]!
 }
 
-type DeveloperProductModel {
-  product: ProductModel!
+type DeveloperProduct {
+  product: Product!
   productId: String!
-  developer: DeveloperModel!
+  developer: Developer!
   developerId: String!
   createdAt: String!
 }
 
-type DeveloperModel {
+type Developer {
   id: String!
   email: String!
   encryptedPassword: String!
-  joinedProducts: [DeveloperProductModel!]!
+  joinedProducts: [DeveloperProduct!]!
 }
 
 type Query {
-  signedDeveloper(id: String!): DeveloperModel
-  signedUser(id: String!): UserModel
+  signedDeveloper(id: String!): Developer
+  signedUser(id: String!): User
 }

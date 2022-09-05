@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
-import { DeveloperModule } from './components/developers/developer.module';
-import { UserModule } from './components/users/user.module';
+import { DevelopersModule } from '@/developers/developers.module';
+import { UsersModule } from '@/users/users.module';
 
 @Module({
   imports: [
@@ -14,8 +14,8 @@ import { UserModule } from './components/users/user.module';
       // debug: false,
       // playground: false,
     }),
-    DeveloperModule,
-    UserModule,
+    DevelopersModule,
+    UsersModule,
   ],
 })
 export class AppModule {}
