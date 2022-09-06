@@ -11,4 +11,12 @@ export class DevelopersService {
 
     return developer;
   }
+
+  async findByEmail(email: string): Promise<Developer | null> {
+    const developer = await this.prisma.developer.findUnique({
+      where: { email },
+    });
+
+    return developer;
+  }
 }

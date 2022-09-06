@@ -2,13 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Developer {
-  id: String!
-  email: String!
-  encryptedPassword: String!
-  joinedProducts: [DeveloperProduct!]!
-}
-
 type User {
   id: String!
   name: String!
@@ -47,7 +40,28 @@ type DeveloperProduct {
   createdAt: String!
 }
 
+type Developer {
+  id: String!
+  email: String!
+  encryptedPassword: String!
+  joinedProducts: [DeveloperProduct!]!
+}
+
+type LoginResponse {
+  accessToken: String!
+  developer: Developer!
+}
+
 type Query {
-  signedDeveloper(id: String!): Developer
-  signedUser(id: String!): User
+  developer(id: String!): Developer
+  user(id: String!): User
+}
+
+type Mutation {
+  login(loginInput: LoginInput!): LoginResponse!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
 }

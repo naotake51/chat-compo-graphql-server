@@ -6,8 +6,8 @@ export class UsersResolver {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
-  @Query(() => User, { name: 'signedUser', nullable: true })
-  async getSignedUser(@Args('id', { type: () => String }) id: string) {
+  @Query(() => User, { name: 'user', nullable: true })
+  async getUser(@Args('id', { type: () => String }) id: string) {
     return {
       id: '40061f88-f6ac-d2fc-167b-c5a860f79f54',
       name: 'hoge',

@@ -2,6 +2,7 @@ import { join } from 'path';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import { AuthModule } from './auth/auth.module';
 import { DevelopersModule } from '@/developers/developers.module';
 import { UsersModule } from '@/users/users.module';
 
@@ -16,6 +17,7 @@ import { UsersModule } from '@/users/users.module';
     }),
     DevelopersModule,
     UsersModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

@@ -1,5 +1,7 @@
 import { NotFoundException } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { DeveloperProductsService } from '@/developer-products/developer-products.service';
 import { DevelopersService } from '@/developers/developers.service';
 import { Developer } from '@/developers/models/developer.model';
@@ -11,8 +13,9 @@ export class DevelopersResolver {
     private readonly developerProductsService: DeveloperProductsService,
   ) {}
 
-  @Query(() => Developer, { name: 'signedDeveloper', nullable: true })
-  async getSignedDeveloper(@Args('id', { type: () => String }) id: string) {
+  @Query(() => Developer, { name: 'developer', nullable: true })
+  @UseGuards(JwtAuthGuard)
+  async getDeveloper(@Args('id', { type: () => String }) id: string) {
     const developer = await this.developersService.findById(id);
     if (!developer) {
       throw new NotFoundException();

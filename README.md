@@ -76,26 +76,27 @@ Nest is [MIT licensed](LICENSE).
 
 http://localhost:3000/graphql
 
+HTTP HEADERS
+```json
+{
+  "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJzdWIiOiI4Njc0MmNkNy02MDhhLWYzNzItZTRlNy1lZjBhMmVhMjNmYzciLCJpYXQiOjE2NjI0NDg0MjQsImV4cCI6MTY2MjQ1MjAyNH0.m0nLK9XGuXArn-v3vsbCXPXzgr3QnL5cUkZMTu9Gn3M"  
+}
+```
+
 ```graphql
 # Write your query or mutation here
 query {
-  signedDeveloper(id: "86742cd7-608a-f372-e4e7-ef0a2ea23fc7") {
+  developer(id: "86742cd7-608a-f372-e4e7-ef0a2ea23fc7") {
     id
     email
     joinedProducts {
-      product {
+      productId
+  		product {
         id
-        name
-        users {
-          id
-        }
-        rooms {
-          id
-        }
       }
     }
   }
-  signedUser(id: "1") {
+  user(id: "1") {
     id
     name
     joinedRooms {
@@ -115,4 +116,28 @@ query {
     }
   }
 }
-``
+```
+
+```graphql
+mutation {
+  login(
+    loginInput: {
+      email: "test@example.com", 
+      password: "password12345"
+    }
+  ) {
+    developer {
+    	email
+    },
+    accessToken
+  }
+}
+```
+
+## DataBase
+
+```
+npx prisma studio
+```
+
+http://localhost:5555

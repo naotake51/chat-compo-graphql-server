@@ -7,5 +7,6 @@ import { PrismaService } from '@/prisma.service';
 @Module({
   providers: [DevelopersResolver, DevelopersService, PrismaService],
   imports: [DeveloperProductsModule],
+  exports: [DevelopersService],
 })
 export class DevelopersModule {}
