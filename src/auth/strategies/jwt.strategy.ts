@@ -20,6 +20,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: Payload): Promise<Developer | null> {
-    return this.developersService.findByEmail(payload.email);
+    const developer = await this.developersService.findByEmail(payload.email);
+
+    return developer;
   }
 }
