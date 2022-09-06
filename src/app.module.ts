@@ -14,6 +14,7 @@ import { UsersModule } from '@/users/users.module';
       sortSchema: false,
       // debug: false,
       // playground: false,
+      installSubscriptionHandlers: true, // FIXME: 最新バージョンの Apollo サーバーから削除されており、このパッケージでもまもなく廃止される予定
     }),
     DevelopersModule,
     UsersModule,

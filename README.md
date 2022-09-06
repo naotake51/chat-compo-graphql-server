@@ -84,7 +84,6 @@ HTTP HEADERS
 ```
 
 ```graphql
-# Write your query or mutation here
 query {
   developer(id: "86742cd7-608a-f372-e4e7-ef0a2ea23fc7") {
     id
@@ -128,8 +127,36 @@ mutation {
   ) {
     developer {
     	email
+      joinedProducts {
+        productId
+  	  	product {
+          id
+        }
+      }
     },
     accessToken
+  }
+}
+```
+
+```graphql
+mutation {
+  updateDeveloper(
+    data: {
+      id: "86742cd7-608a-f372-e4e7-ef0a2ea23fc7", 
+      email: "test2@example.com"
+    }
+  ) {
+    email
+  }
+}
+```
+
+```graphql
+subscription {
+  developerUpdated(id: "86742cd7-608a-f372-e4e7-ef0a2ea23fc7") {
+    id
+    email
   }
 }
 ```

@@ -19,4 +19,13 @@ export class DevelopersService {
 
     return developer;
   }
+
+  async update(developer: Partial<Developer>): Promise<Developer | null> {
+    const updatedDeveloper = await this.prisma.developer.update({
+      where: { id: developer.id },
+      data: developer,
+    });
+
+    return updatedDeveloper;
+  }
 }

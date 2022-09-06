@@ -5,7 +5,6 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { DevelopersService } from '@/developers/developers.service';
 
 type Payload = {
-  email: string;
   sub: string;
 };
 
@@ -20,7 +19,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: Payload): Promise<Developer | null> {
-    const developer = await this.developersService.findByEmail(payload.email);
+    const developer = await this.developersService.findById(payload.sub);
 
     return developer;
   }
