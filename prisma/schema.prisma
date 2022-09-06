@@ -13,7 +13,7 @@ datasource db {
 model SystemAdmin {
   id                String             @id @default(uuid()) // 変更不可
   email             String             @unique
-  encriptedPassword String? // 仮登録中はNull
+  encryptedPassword String? // 仮登録中はNull
   createdAt         DateTime           @default(now()) // 変更不可
   updatedAt         DateTime           @updatedAt
 
@@ -23,7 +23,7 @@ model SystemAdmin {
 model Developer {
   id                String             @id @default(uuid()) // 変更不可
   email             String             @unique
-  encriptedPassword String? // 仮登録中はNull
+  encryptedPassword String? // 仮登録中はNull
   joinedProducts    DeveloperProduct[]
   createdAt         DateTime           @default(now()) // 変更不可
   updatedAt         DateTime           @updatedAt
