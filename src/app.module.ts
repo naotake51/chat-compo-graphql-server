@@ -40,11 +40,9 @@ function verifyAuthorizationHeader(authorization: any) {
           onConnect: (context: Context<any>) => {
             const { connectionParams, extra } = context;
 
-            const user = verifyAuthorizationHeader(
+            (extra as any).payload = verifyAuthorizationHeader(
               connectionParams.Authorization,
             );
-
-            (extra as any).user = user;
           },
         },
         'subscriptions-transport-ws': {
@@ -52,11 +50,11 @@ function verifyAuthorizationHeader(authorization: any) {
           // このパッケージでもまもなく廃止される予定なので、graphql-wsを使うことが推奨されている。
           // GraphQL Playgroundがsubscriptions-transport-wsで通信するようになっていて、graphql-wsへの切り替え方がわからなかったので開発用として残している。
           onConnect: (connectionParams) => {
-            const user = verifyAuthorizationHeader(
-              connectionParams.Authorization,
-            );
-
-            return { user };
+            return {
+              payload: verifyAuthorizationHeader(
+                connectionParams.Authorization,
+              ),
+            };
           },
         },
       },

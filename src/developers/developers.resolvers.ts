@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import {
   Args,
+  Context,
   Mutation,
   Parent,
   Query,
@@ -15,7 +16,7 @@ import {
 import { PubSub } from 'graphql-subscriptions';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { UpdateDeveloperInput } from './dto/update-developer.input';
-import { CurrentUser } from '@/auth/decrators/currect-user.decrator';
+import { AuthUser } from '@/auth/decrators/auth-user.decrator';
 import { DeveloperProductsService } from '@/developer-products/developer-products.service';
 import { DevelopersService } from '@/developers/developers.service';
 import { Developer } from '@/developers/models/developer.model';
@@ -32,10 +33,10 @@ export class DevelopersResolver {
   @Query(() => Developer, { name: 'developer', nullable: true })
   @UseGuards(JwtAuthGuard)
   async getDeveloper(
-    @CurrentUser() user,
+    @AuthUser() authUser,
     @Args('id', { type: () => String }) id: string,
   ) {
-    if (user.id !== id) {
+    if (id !== authUser.id) {
       throw new ForbiddenException();
     }
 
@@ -55,11 +56,16 @@ export class DevelopersResolver {
     return developerProducts;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Mutation(() => Developer)
   async updateDeveloper(
-    @Args('data', { type: () => UpdateDeveloperInput })
-    developer: Developer,
+    @AuthUser() authUser,
+    @Args('data', { type: () => UpdateDeveloperInput }) developer: Developer,
   ) {
+    if (developer.id !== authUser.id) {
+      throw new ForbiddenException();
+    }
+
     const updatedDeveloper = await this.developersService.update(developer);
     if (!updatedDeveloper) {
       throw new NotFoundException();
@@ -75,7 +81,11 @@ export class DevelopersResolver {
       return payload.developerUpdated.id === variables.id;
     },
   })
-  developerUpdated(@Args('id') id: string) {
+  developerUpdated(@Context() context, @Args('id') id: string) {
+    if (context.payload.sub !== id) {
+      throw new ForbiddenException();
+    }
+
     return pubSub.asyncIterator('developerUpdated');
   }
 }
