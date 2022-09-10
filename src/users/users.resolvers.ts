@@ -1,12 +1,13 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { User } from '@/users/models/user.model';
 
-@Resolver((of) => User)
+@Resolver(() => User)
 export class UsersResolver {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
   @Query(() => User, { name: 'user', nullable: true })
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async getUser(@Args('id', { type: () => String }) id: string) {
     return {
       id: '40061f88-f6ac-d2fc-167b-c5a860f79f54',
@@ -15,6 +16,7 @@ export class UsersResolver {
   }
 
   @ResolveField()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async joinedRooms(@Parent() signedUser: User) {
     return [
       {

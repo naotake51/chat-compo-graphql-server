@@ -3,15 +3,15 @@ import { UserRoom } from '@/user-rooms/models/user-room.model';
 
 @ObjectType()
 export class User {
-  @Field((type) => String)
+  @Field(() => String)
   id: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   name: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   secretKey: string;
 
-  @Field((type) => [UserRoom])
+  @Field(() => [UserRoom])
   joinedRooms: UserRoom[];
 }

@@ -23,7 +23,7 @@ import { Developer } from '@/developers/models/developer.model';
 
 const pubSub = new PubSub();
 
-@Resolver((of) => Developer)
+@Resolver(() => Developer)
 export class DevelopersResolver {
   constructor(
     private readonly developersService: DevelopersService,

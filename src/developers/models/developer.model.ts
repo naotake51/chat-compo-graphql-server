@@ -3,15 +3,15 @@ import { DeveloperProduct } from '@/developer-products/models/developer-product.
 
 @ObjectType()
 export class Developer {
-  @Field((type) => String)
+  @Field(() => String)
   id: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   email: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   encryptedPassword: string;
 
-  @Field((type) => [DeveloperProduct])
+  @Field(() => [DeveloperProduct])
   joinedProducts: DeveloperProduct[];
 }

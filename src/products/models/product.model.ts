@@ -5,21 +5,21 @@ import { User } from '@/users/models/user.model';
 
 @ObjectType()
 export class Product {
-  @Field((type) => String)
+  @Field(() => String)
   id: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   name: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   secretKey: string;
 
-  @Field((type) => [DeveloperProduct])
+  @Field(() => [DeveloperProduct])
   joinedDeveloper: DeveloperProduct[];
 
-  @Field((type) => [User])
+  @Field(() => [User])
   users: User[];
 
-  @Field((type) => [Room])
+  @Field(() => [Room])
   rooms: Room[];
 }

@@ -4,15 +4,15 @@ import { User } from '@/users/models/user.model';
 
 @ObjectType()
 export class UserRoom {
-  @Field((type) => Room)
+  @Field(() => Room)
   room: Room;
 
-  @Field((type) => User)
+  @Field(() => User)
   user: User;
 
-  @Field((type) => Int)
+  @Field(() => Int)
   joinedMessageOrder: number;
 
-  @Field((type) => Int)
+  @Field(() => Int)
   readMessageOrder: number;
 }

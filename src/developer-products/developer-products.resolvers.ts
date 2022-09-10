@@ -3,7 +3,7 @@ import { Parent, ResolveField, Resolver } from '@nestjs/graphql';
 import { DeveloperProduct } from '@/developer-products/models/developer-product.model';
 import { ProductsService } from '@/products/products.service';
 
-@Resolver((of) => DeveloperProduct)
+@Resolver(() => DeveloperProduct)
 export class DeveloperProductsResolver {
   constructor(private readonly productsService: ProductsService) {}
 

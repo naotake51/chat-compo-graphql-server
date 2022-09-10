@@ -4,18 +4,18 @@ import { Product } from '@/products/models/product.model';
 
 @ObjectType()
 export class DeveloperProduct {
-  @Field((type) => Product)
+  @Field(() => Product)
   product: Product;
 
-  @Field((type) => String)
+  @Field(() => String)
   productId: string;
 
-  @Field((type) => Developer)
+  @Field(() => Developer)
   developer: Developer;
 
-  @Field((type) => String)
+  @Field(() => String)
   developerId: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   createdAt: string;
 }
