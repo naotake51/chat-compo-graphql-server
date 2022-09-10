@@ -3,9 +3,28 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
+import { JwtService } from '@nestjs/jwt';
+import { Context } from 'graphql-ws';
 import { AuthModule } from './auth/auth.module';
 import { DevelopersModule } from '@/developers/developers.module';
 import { UsersModule } from '@/users/users.module';
+
+const jwtService = new JwtService({ secret: process.env.JWT_SECRET });
+
+function verifyAuthorizationHeader(authorization: any) {
+  if (authorization === undefined)
+    throw new Error('Authorization header undefined.');
+
+  if (typeof authorization !== 'string')
+    throw new Error('Authorization header type error.');
+
+  const matcher = authorization.match(/^Bearer +(.*)$/);
+  if (!matcher) throw new Error('Authorization header format error.');
+
+  const authToken = matcher[1];
+
+  return jwtService.verify(authToken);
+}
 
 @Module({
   imports: [
@@ -17,8 +36,29 @@ import { UsersModule } from '@/users/users.module';
       // debug: false,
       // playground: false,
       subscriptions: {
-        'graphql-ws': true,
-        'subscriptions-transport-ws': true,
+        'graphql-ws': {
+          onConnect: (context: Context<any>) => {
+            const { connectionParams, extra } = context;
+
+            const user = verifyAuthorizationHeader(
+              connectionParams.Authorization,
+            );
+
+            (extra as any).user = user;
+          },
+        },
+        'subscriptions-transport-ws': {
+          // FIXME
+          // このパッケージでもまもなく廃止される予定なので、graphql-wsを使うことが推奨されている。
+          // GraphQL Playgroundがsubscriptions-transport-wsで通信するようになっていて、graphql-wsへの切り替え方がわからなかったので開発用として残している。
+          onConnect: (connectionParams) => {
+            const user = verifyAuthorizationHeader(
+              connectionParams.Authorization,
+            );
+
+            return { user };
+          },
+        },
       },
     }),
     DevelopersModule,
