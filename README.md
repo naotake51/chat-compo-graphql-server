@@ -74,6 +74,7 @@ Nest is [MIT licensed](LICENSE).
 
 ## Query sample
 
+**GraphQL Playground**
 http://localhost:3000/graphql
 
 HTTP HEADERS
