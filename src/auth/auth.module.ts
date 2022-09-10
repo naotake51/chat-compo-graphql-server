@@ -12,8 +12,8 @@ import { DevelopersModule } from '@/developers/developers.module';
     DevelopersModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
-      secret: process.env.JWT_SECRET || 'hogehoge',
-      signOptions: { expiresIn: '1h' },
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: process.env.JWT_EXPIRES_IN },
     }),
   ],
   providers: [AuthService, AuthResolver, LocalStrategy, JwtStrategy],
