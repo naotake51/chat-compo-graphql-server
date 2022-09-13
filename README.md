@@ -193,3 +193,10 @@ npx prisma studio
 ```
 
 http://localhost:5555
+
+
+## Seeder
+
+```
+npx prisma db seed
+```
