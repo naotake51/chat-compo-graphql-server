@@ -33,8 +33,8 @@ function verifyAuthorizationHeader(authorization: any) {
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: false,
-      // debug: false,
-      // playground: false,
+      debug: process.env.NODE_ENV === 'development',
+      playground: process.env.NODE_ENV === 'development',
       subscriptions: {
         'graphql-ws': {
           onConnect: (context: Context<any>) => {
