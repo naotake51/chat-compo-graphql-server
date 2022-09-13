@@ -15,7 +15,8 @@ import {
 } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { UpdateDeveloperInput } from './dto/update-developer.input';
+import { DeveloperCreateInput } from './dto/developer-create.input';
+import { DeveloperUpdateInput } from './dto/developer-update.input';
 import { AuthUser } from '@/auth/decrators/auth-user.decrator';
 import { DeveloperProductsService } from '@/developer-products/developer-products.service';
 import { DevelopersService } from '@/developers/developers.service';
@@ -56,11 +57,24 @@ export class DevelopersResolver {
     return developerProducts;
   }
 
+  @Mutation(() => Developer)
+  async createDeveloper(
+    @Args('data', { type: () => DeveloperCreateInput })
+    developer: DeveloperCreateInput,
+  ) {
+    const createdDeveloper = await this.developersService.create(developer);
+
+    pubSub.publish('developerCreated', { developerUpdated: createdDeveloper });
+
+    return createdDeveloper;
+  }
+
   @UseGuards(JwtAuthGuard)
   @Mutation(() => Developer)
   async updateDeveloper(
     @AuthUser() authUser,
-    @Args('data', { type: () => UpdateDeveloperInput }) developer: Developer,
+    @Args('data', { type: () => DeveloperUpdateInput })
+    developer: DeveloperUpdateInput,
   ) {
     if (developer.id !== authUser.id) {
       throw new ForbiddenException();

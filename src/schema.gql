@@ -58,11 +58,17 @@ type Query {
 }
 
 type Mutation {
-  updateDeveloper(data: UpdateDeveloperInput!): Developer!
+  createDeveloper(data: DeveloperCreateInput!): Developer!
+  updateDeveloper(data: DeveloperUpdateInput!): Developer!
   login(loginInput: LoginInput!): LoginResponse!
 }
 
-input UpdateDeveloperInput {
+input DeveloperCreateInput {
+  email: String!
+  password: String!
+}
+
+input DeveloperUpdateInput {
   id: String!
   email: String
 }

@@ -120,6 +120,19 @@ query {
 
 ```graphql
 mutation {
+  createDeveloper(
+    data: {
+      email: "test@example.com"
+      password: "password1234"
+    }
+  ) {
+    email
+  }
+}
+```
+
+```graphql
+mutation {
   login(
     loginInput: {
       email: "test@example.com", 
