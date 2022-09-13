@@ -84,6 +84,32 @@ HTTP HEADERS
 }
 ```
 
+### Login Developer
+
+```graphql
+mutation {
+  login(
+    loginInput: {
+      email: "test@example.com", 
+      password: "password12345"
+    }
+  ) {
+    developer {
+    	email
+      joinedProducts {
+        productId
+  	  	product {
+          id
+        }
+      }
+    },
+    accessToken
+  }
+}
+```
+
+### Show Developer
+
 ```graphql
 query {
   developer(id: "86742cd7-608a-f372-e4e7-ef0a2ea23fc7") {
@@ -118,6 +144,8 @@ query {
 }
 ```
 
+### Create Developer
+
 ```graphql
 mutation {
   createDeveloper(
@@ -131,27 +159,8 @@ mutation {
 }
 ```
 
-```graphql
-mutation {
-  login(
-    loginInput: {
-      email: "test@example.com", 
-      password: "password12345"
-    }
-  ) {
-    developer {
-    	email
-      joinedProducts {
-        productId
-  	  	product {
-          id
-        }
-      }
-    },
-    accessToken
-  }
-}
-```
+### Update Developer
+
 
 ```graphql
 mutation {
@@ -165,6 +174,8 @@ mutation {
   }
 }
 ```
+
+### Subscribe Developer Update
 
 ```graphql
 subscription {
