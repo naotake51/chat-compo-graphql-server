@@ -7,7 +7,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Context } from 'graphql-ws';
 import { AuthModule } from './auth/auth.module';
 import { DevelopersModule } from '@/developers/developers.module';
-import { UsersModule } from '@/users/users.module';
+import { TalkersModule } from '@/talkers/talkers.module';
 
 const jwtService = new JwtService({ secret: process.env.JWT_SECRET });
 
@@ -60,7 +60,7 @@ function verifyAuthorizationHeader(authorization: any) {
       },
     }),
     DevelopersModule,
-    UsersModule,
+    TalkersModule,
     AuthModule,
   ],
 })

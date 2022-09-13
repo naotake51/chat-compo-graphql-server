@@ -2,16 +2,16 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
+type Talker {
   id: String!
   name: String!
   secretKey: String!
-  joinedRooms: [UserRoom!]!
+  joinedRooms: [TalkerRoom!]!
 }
 
-type UserRoom {
+type TalkerRoom {
   room: Room!
-  user: User!
+  talker: Talker!
   joinedMessageOrder: Int!
   readMessageOrder: Int!
 }
@@ -20,7 +20,7 @@ type Room {
   id: String!
   name: String!
   secretKey: String!
-  joinedUsers: [UserRoom!]!
+  joinedTalkers: [TalkerRoom!]!
 }
 
 type Product {
@@ -28,7 +28,7 @@ type Product {
   name: String!
   secretKey: String!
   joinedDeveloper: [DeveloperProduct!]!
-  users: [User!]!
+  talkers: [Talker!]!
   rooms: [Room!]!
 }
 
@@ -54,7 +54,7 @@ type LoginResponse {
 
 type Query {
   developer(id: String!): Developer
-  user(id: String!): User
+  talker(id: String!): Talker
 }
 
 type Mutation {

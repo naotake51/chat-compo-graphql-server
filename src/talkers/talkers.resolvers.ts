@@ -1,14 +1,14 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
-import { User } from '@/users/models/user.model';
+import { Talker } from '@/talkers/models/talker.model';
 
-@Resolver(() => User)
-export class UsersResolver {
+@Resolver(() => Talker)
+export class TalkersResolver {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
-  @Query(() => User, { name: 'user', nullable: true })
+  @Query(() => Talker, { name: 'talker', nullable: true })
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async getUser(@Args('id', { type: () => String }) id: string) {
+  async getTalker(@Args('id', { type: () => String }) id: string) {
     return {
       id: '40061f88-f6ac-d2fc-167b-c5a860f79f54',
       name: 'hoge',
@@ -17,7 +17,7 @@ export class UsersResolver {
 
   @ResolveField()
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async joinedRooms(@Parent() signedUser: User) {
+  async joinedRooms(@Parent() signedTalker: Talker) {
     return [
       {
         joinedMessageOrder: 1,
@@ -26,11 +26,11 @@ export class UsersResolver {
           id: 'aaf7212c-1bba-db35-848a-366c57d543d1',
           name: 'hoge',
           secretKey: '80ee6d5e-52d3-e801-a37d-25bdaea6b580',
-          joinedUsers: [
+          joinedTalkers: [
             {
               joinedMessageOrder: 1,
               readMessageOrder: 1,
-              user: {
+              talker: {
                 id: 'aaf7212c-1bba-db35-848a-366c57d543d1',
                 name: 'hoge',
                 secretKey: '80ee6d5e-52d3-e801-a37d-25bdaea6b580',

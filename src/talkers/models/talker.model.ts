@@ -1,8 +1,8 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { UserRoom } from '@/user-rooms/models/user-room.model';
+import { TalkerRoom } from '@/talker-rooms/models/talker-room.model';
 
 @ObjectType()
-export class User {
+export class Talker {
   @Field(() => String)
   id: string;
 
@@ -12,6 +12,6 @@ export class User {
   @Field(() => String)
   secretKey: string;
 
-  @Field(() => [UserRoom])
-  joinedRooms: UserRoom[];
+  @Field(() => [TalkerRoom])
+  joinedRooms: TalkerRoom[];
 }

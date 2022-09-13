@@ -96,7 +96,7 @@ query {
       }
     }
   }
-  user(id: "1") {
+  talker(id: "1") {
     id
     name
     joinedRooms {
@@ -105,10 +105,10 @@ query {
       room {
        id
        name
-       joinedUsers {
+       joinedTalkers {
          joinedMessageOrder
          readMessageOrder
-      	 user {
+      	 talker {
           id
          }
        }

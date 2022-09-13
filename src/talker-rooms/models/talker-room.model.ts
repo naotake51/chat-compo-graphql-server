@@ -1,14 +1,14 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Room } from '@/rooms/models/room.model';
-import { User } from '@/users/models/user.model';
+import { Talker } from '@/talkers/models/talker.model';
 
 @ObjectType()
-export class UserRoom {
+export class TalkerRoom {
   @Field(() => Room)
   room: Room;
 
-  @Field(() => User)
-  user: User;
+  @Field(() => Talker)
+  talker: Talker;
 
   @Field(() => Int)
   joinedMessageOrder: number;

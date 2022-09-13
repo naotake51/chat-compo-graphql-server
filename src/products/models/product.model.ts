@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { DeveloperProduct } from '@/developer-products/models/developer-product.model';
 import { Room } from '@/rooms/models/room.model';
-import { User } from '@/users/models/user.model';
+import { Talker } from '@/talkers/models/talker.model';
 
 @ObjectType()
 export class Product {
@@ -17,8 +17,8 @@ export class Product {
   @Field(() => [DeveloperProduct])
   joinedDeveloper: DeveloperProduct[];
 
-  @Field(() => [User])
-  users: User[];
+  @Field(() => [Talker])
+  talkers: Talker[];
 
   @Field(() => [Room])
   rooms: Room[];
