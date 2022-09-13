@@ -200,3 +200,33 @@ http://localhost:5555
 ```
 npx prisma db seed
 ```
+
+## Environment
+
+Properties defined in .env are merged into environment variables.
+
+```txt:.env
+NODE_ENV="development"
+```
+
+Once you have defined the new environment variables, add the code to the following file.
+
+```ts:src/global.d.ts
+declare namespace NodeJS {
+  interface ProcessEnv {
+    readonly NODE_ENV: 'development' | 'production' | 'test';
+  }
+}
+```
+
+```ts:src/app.module.ts
+@Module({
+  imports: [
+    ConfigModule.forRoot({
+      validationSchema: Joi.object({
+        NODE_ENV: Joi.string()
+          .valid('development', 'production', 'test')
+          .required(),
+      }),
+    }),
+```
