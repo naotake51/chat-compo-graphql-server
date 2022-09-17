@@ -14,10 +14,10 @@ import {
   Subscription,
 } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { DeveloperCreateInput } from './dto/developer-create.input';
 import { DeveloperUpdateInput } from './dto/developer-update.input';
 import { AuthUser } from '@/auth/decrators/auth-user.decrator';
+import { JwtAuthGuard } from '@/auth/guards/jwt-auth.guard';
 import { DeveloperProductsService } from '@/developer-products/developer-products.service';
 import { DevelopersService } from '@/developers/developers.service';
 import { Developer } from '@/developers/models/developer.model';
