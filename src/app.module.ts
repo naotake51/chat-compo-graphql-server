@@ -30,7 +30,12 @@ function verifyAuthorizationHeader(authorization: any) {
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: `.env.${process.env.NODE_ENV}`,
+      /**
+       * developとtestで.envを切り替えながら運用する。
+       * NODE_ENVによって参照するファイルを切り替えようかと考えたがPrismaが.envを直接参照しているので諦めた。
+       * Dockerコンテナを開発用とテスト用でそれぞれ用意するのも考慮したが、現状では.envを切り替えるのが一番楽と判断。
+       */
+      envFilePath: '.env',
       validationSchema: Joi.object({
         NODE_ENV: Joi.string()
           .valid('development', 'production', 'test')

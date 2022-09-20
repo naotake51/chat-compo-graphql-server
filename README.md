@@ -205,13 +205,15 @@ npx prisma db seed
 
 Properties defined in .env are merged into environment variables.
 
-```txt:.env
+**.env**
+```txt
 NODE_ENV="development"
 ```
 
 Once you have defined the new environment variables, add the code to the following file.
 
-```ts:src/global.d.ts
+**src/global.d.ts**
+```ts
 declare namespace NodeJS {
   interface ProcessEnv {
     readonly NODE_ENV: 'development' | 'production' | 'test';
@@ -219,7 +221,8 @@ declare namespace NodeJS {
 }
 ```
 
-```ts:src/app.module.ts
+**src/app.module.ts**
+```ts
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -229,4 +232,15 @@ declare namespace NodeJS {
           .required(),
       }),
     }),
+```
+
+### Create Test DB & Migration
+
+```bash
+docker-compose exec postgres psql -U root -d chat-compo -c "CREATE DATABASE \"chat-compo-test\""
+```
+
+Prism references `.env`, so copy `.env.test` to `.env` and run the command.
+```bash
+npx prisma migrate deploy
 ```
